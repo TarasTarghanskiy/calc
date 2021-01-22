@@ -1,0 +1,265 @@
+@font-face {
+  font-family: 'Calculator MDL2 Assets';
+  src: url('/fonts/CalcMDL2.ttf');
+}
+
+.mainPane {
+  /*-fx-background-color: rgba(230, 230, 230, 0);*/
+  -fx-background-color: rgba(230, 230, 230, 1);
+  -fx-border-width: 1px;
+  -fx-border-color: black;
+}
+
+.systemPane:focused {
+  -fx-background-color: red;
+}
+
+.systemButton:hover {
+  -fx-background-color: rgb(207, 207, 207);
+}
+
+/*.systemButton:pressed {*/
+/*  -fx-background-color: rgb(192, 192, 192);*/
+/*}*/
+
+.systemButton {
+  -fx-background-radius: 0;
+  -fx-font-family: "Segoe MDL2 Assets";
+  -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.exitButton {
+  -fx-font-family: "Segoe MDL2 Assets";
+  -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-background-radius: 0;
+  -fx-font-size: 12;
+  -fx-padding: 0 0 0 0;
+  /*-fx-graphic: url("/image/black_cross.png");*/
+}
+
+.exitButton:hover {
+  -fx-background-color: red;
+  -fx-text-fill: white;
+  -fx-border-width: 1 1 0 0;
+  -fx-border-color: black;
+  /*-fx-graphic: url("/image/white_cross.jpg");*/
+}
+
+
+.programPane {
+}
+
+
+.viewField {
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-font-size: 46;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-padding: 0 3 0 0;
+  -fx-text-fill: black;
+}
+
+.memoryPaneButton {
+  -fx-background-radius: 0;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  -fx-font-weight: bold;
+}
+
+.resultButton {
+  -fx-background-radius: 0;
+  -fx-font-family: "Calculator MDL2 Assets";
+  -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  -fx-background-color: rgb(139, 185, 222);
+  -fx-font-size: 15;
+}
+
+.resultButton:hover {
+  -fx-background-color: rgb(69, 152, 218);
+}
+
+.resultButton:pressed {
+  -fx-background-color: rgb(0, 120, 215);
+}
+
+.grayButton {
+  -fx-background-radius: 0;
+  -fx-font-family: "Segoe MDL2 Assets";
+  -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  -fx-background-color: rgb(240, 240, 240);
+  -fx-font-size: 15;
+}
+
+.grayButton:hover {
+  -fx-background-color: rgb(207, 207, 207);
+}
+
+.grayButton:pressed {
+  -fx-background-color: rgb(192, 192, 192);
+}
+
+.whiteButton {
+  -fx-background-radius: 0;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  -fx-background-color: rgb(250, 250, 250);
+  -fx-font-size: 18;
+  -fx-font-weight: bold;
+}
+
+.whiteButton:hover {
+  -fx-background-color: rgb(207, 207, 207);
+}
+
+.whiteButton:pressed {
+  -fx-background-color: rgb(192, 192, 192);
+}
+
+.leftMenu {
+  -fx-background-color: rgb(230, 230, 230);
+}
+
+/*@media only screen and (max-width: 600px) {*/
+/*  body {*/
+/*    background-color: lightblue;*/
+/*  }*/
+/*}*/
+
+.leftMenuText {
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-font-size: 14;
+  -fx-font-weight: bold;
+  -fx-text-fill: black;
+  -fx-alignment: center-left;
+  -fx-padding: 10 10 9 10;
+  -fx-background-color: rgb(230, 230, 230);
+}
+
+.leftMenuButton {
+  -fx-font-family: "Calculator MDL2 Assets";
+  -fx-text-fill: black;
+  -fx-font-size: 14;
+  -fx-alignment: center-left;
+  -fx-background-color: rgb(230, 230, 230);
+}
+
+.leftMenuButton:hover {
+  -fx-background-color: rgb(207, 207, 207);
+}
+
+.leftMenuButton:pressed {
+  -fx-background-color: rgb(192, 192, 192);
+}
+
+.scroll-bar {
+  -fx-pref-width: 2px;
+}
+
+.scroll-bar:vertical *.increment-button,
+.scroll-bar:vertical *.decrement-button {
+  -fx-background-color: transparent;
+  -fx-border-color: rgb(230, 230, 230);
+  -fx-padding: 0 0 0 0;
+  -fx-pref-height: 20;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+  -fx-background-color: transparent;
+  -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .track {
+  -fx-border-color: rgb(230, 230, 230);
+  -fx-background-color: rgb(230, 230, 230);
+}
+
+.scroll-bar:vertical .thumb {
+  -fx-background-radius: 0;
+  -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  -fx-background-color: rgb(128, 128, 128);
+}
+
+.topSB:hover {
+  -fx-border-width: 1 0 0 0;
+  -fx-border-color: black;
+}
+
+.leftSB:hover {
+  -fx-border-width: 0 0 0 1;
+  -fx-border-color: black;
+}
+
+.rightSB:hover {
+  -fx-border-width: 0 1 0 0;
+  -fx-border-color: black;
+}
+
+
+.text-area .scroll-pane {
+  -fx-padding: 0;
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-hbar-policy: NEVER;
+  -fx-vbar-policy: NEVER;
+}
+
+.text-area .scroll-pane:vertical {
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-hbar-policy: NEVER;
+  -fx-vbar-policy: NEVER;
+}
+
+.text-area .scroll-bar {
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-hbar-policy: NEVER;
+  -fx-vbar-policy: NEVER;
+}
+
+.text-area .scroll-bar:horizontal {
+  -fx-pref-height: 1;
+  -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.text-area .scroll-bar:vertical {
+  -fx-pref-width: 1;
+  -fx-background-color: rgba(0, 0, 0, 0);
+}
+
+.text-area .content {
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-padding: 0 0 0 0;
+}
+
+.text-area .text {
+  -fx-text-alignment: right;
+}
+
+.text-area:focused {
+  -fx-background-insets: 0, 0, 0;
+  -fx-background-radius: 0, 0, 0;
+}
+
+
+.text-area {
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-background-insets: 0, 0, 0;
+  -fx-background-radius: 0, 0, 0;
+  -fx-border-radius: 0;
+}
+
+.storyField {
+  -fx-background-color: rgba(0, 0, 0, 0);
+  -fx-font-family: "Segoe UI Semibold";
+  /*-fx-background-color: red;*/
+  -fx-padding: 0 10 0 0;
+  -fx-text-fill: rgb(105, 105, 105);
+  -fx-font-size: 14;
+  -fx-start-margin: 0;
+  -fx-end-margin: 0;
+}
+

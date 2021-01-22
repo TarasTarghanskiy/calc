@@ -1,0 +1,23 @@
+
+y
+java:S1905æ"VRemove this unnecessary cast to "org.sonar.java.resolve.Symbols$UnknownType@77fa4d5e".(†“¯ùÿÿÿÿ8“ğÇ¦ò.
+O
+java:S1172Ù",Remove this unused method parameter "event".(üÒÏèıÿÿÿÿ8ùˆƒò.
+y
+java:S1905ç"VRemove this unnecessary cast to "org.sonar.java.resolve.Symbols$UnknownType@77fa4d5e".(†“¯ùÿÿÿÿ8ùˆƒò.
+P
+java:S1068t".Remove this unused "isSavedNum" private field.(ÖëÈˆøÿÿÿÿ8ÃÉš±ò.
+J
+java:S1172„",Remove this unused method parameter "event".(äµ¬×8ùˆƒò.
+O
+java:S1172ü",Remove this unused method parameter "event".(ß„«’úÿÿÿÿ8ùˆƒò.
+y
+java:S1905ñ"VRemove this unnecessary cast to "org.sonar.java.resolve.Symbols$UnknownType@77fa4d5e".(ó¨•©øÿÿÿÿ8ùˆƒò.
+p
+java:S1192ˆ"RDefine a constant instead of duplicating this literal "Segoe UI Semibold" 4 times.(³¡¢¢8ùˆƒò.
+p
+java:S3776‡"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(ğ¡ğ§8ùˆƒò.
+O
+java:S1602„",Remove useless curly braces around statement(»Æ«Éùÿÿÿÿ8ùˆƒò.
+O
+java:S1172Õ",Remove this unused method parameter "event".(¢¸¾İúÿÿÿÿ8ùˆƒò.

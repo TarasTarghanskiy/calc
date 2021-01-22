@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
+<?import com.implemica.view.components.buttons.OperatorButton?>
+<?import com.implemica.view.components.buttons.NumberButton?>
+<?import com.implemica.view.components.buttons.FunctionButton?>
+<?import com.implemica.view.components.buttons.OtherButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.text.TextFlow?>
+<?import com.implemica.view.components.buttons.CalcButton?>
+<?import com.implemica.view.components.buttons.MemoryButton?>
+<AnchorPane
+  maxWidth="-Infinity"
+  minHeight="512.0"
+  fx:id="mainPane"
+  minWidth="342.0"
+  prefHeight="510.0"
+  prefWidth="340.0" style="-fx-background-color: rgba(0, 0, 0, 0.01);" stylesheets="/style/calcStyle.css" xmlns="http://javafx.com/javafx/11.0.1"
+  xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="com.implemica.controller.Controller">
+  <!-- main border -->
+  <AnchorPane
+    style="-fx-border-color: black; -fx-border-width: 1px"
+    minHeight="500" minWidth="322"
+    AnchorPane.topAnchor="0" AnchorPane.rightAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.bottomAnchor="10">
+    <!-- top title with systems buttons -->
+    <HBox
+      AnchorPane.rightAnchor="0"
+      AnchorPane.leftAnchor="0"
+      AnchorPane.topAnchor="0"
+      prefHeight="32.0"
+      minWidth="320"
+      onMouseDragged="#onSystemPaneDragged"
+      onMousePressed="#onSystemPanePressed"
+      styleClass="system-menu"
+      BorderPane.alignment="CENTER">
+      <Label prefHeight="32.0" prefWidth="200.0" text="Calculator">
+        <padding>
+          <Insets left="12.0" top="9.0"/>
+        </padding>
+      </Label>
+      <Region HBox.hgrow="ALWAYS"/>
+      <Button mnemonicParsing="false" fx:id="miniButton" onMousePressed="#mini" prefHeight="32.0" prefWidth="46.0" style="-fx-font-size: 10;" text=""/>
+      <Button fx:id="sizeChanger" mnemonicParsing="false" onMousePressed="#changeSize" prefHeight="32.0" prefWidth="46.0" style="-fx-font-size: 10;" text=""/>
+      <Button mnemonicParsing="false" onMousePressed="#close" prefHeight="32.0" prefWidth="46.0" styleClass="exit-button" text=""/>
+
+      <BorderPane.margin>
+        <Insets left="10.0" right="10.0"/>
+      </BorderPane.margin>
+    </HBox>
+
+    <!-- main pane + left story pane -->
+    <HBox
+      AnchorPane.leftAnchor="0"
+      AnchorPane.rightAnchor="0"
+      AnchorPane.topAnchor="32"
+      AnchorPane.bottomAnchor="0"
+      minHeight="468.0"
+      minWidth="320.0"
+      styleClass="main-container"
+      BorderPane.alignment="CENTER">
+      <!-- main pane -->
+      <VBox minWidth="320">
+        <!-- system pane -->
+        <HBox prefHeight="40.0" minHeight="40.0">
+          <!-- open left menu -->
+          <Button onMouseClicked="#switchLeftMenu" mnemonicParsing="false" style="-fx-font-size: 16;" prefHeight="40.0" prefWidth="40.0" text="&#xE700;"/>
+          <Label prefHeight="40.0" style="-fx-font-size: 20; -fx-font-family: 'Segoe UI Semibold'; -fx-padding: 0 2 0 7" prefWidth="100.0" text="Standard"/>
+          <!-- pin calc to right top side of window -->
+          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+            <graphic>
+              <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@/image/pin_button.png"/>
+              </ImageView>
+            </graphic>
+          </Button>
+          <Region HBox.hgrow="ALWAYS"/>
+          <!-- open bottom story pane -->
+          <Button text="&#xF738;" style="-fx-font-size: 16;"
+            fx:id="bottomStoryButton"
+            mnemonicParsing="false"
+            minWidth="40" minHeight="40"
+            onMouseClicked="#openBottomStoryPane"
+            AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          </Button>
+        </HBox>
+
+        <Region minHeight="3" maxHeight="21" VBox.vgrow="ALWAYS"/>
+        <!-- STORY FIELD -->
+        <HBox maxHeight="24" VBox.vgrow="ALWAYS" minHeight="17">
+          <Button
+            onMousePressed="#scrollLeft"
+            fx:id="leftScroller"
+            text="&#xe96f;"
+            prefWidth="18"
+            prefHeight="17"
+            maxHeight="24"
+            styleClass="arrow-button"
+            visible="false"
+          />
+
+          <ScrollPane styleClass="story-view" fx:id="scrollPane" maxHeight="10" HBox.hgrow="ALWAYS">
+            <TextFlow textAlignment="RIGHT" fx:id="storyView">
+
+            </TextFlow>
+          </ScrollPane>
+          <Button
+            onMousePressed="#scrollRight"
+            visible="false"
+            fx:id="rightScroller"
+            text="&#xe970;"
+            prefHeight="17"
+            maxHeight="24"
+            prefWidth="18"
+            styleClass="arrow-button"
+          />
+          <Region minHeight="4" maxHeight="8" VBox.vgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- VIEW FIELD -->
+        <AnchorPane minHeight="68" style="-fx-border-color: black; -fx-border-width: 0; -fx-padding: 0 0 2 0" maxHeight="161" VBox.vgrow="ALWAYS">
+          <Label
+            style="-fx-font-size: 46; -fx-font-family: 'Segoe UI Semibold'; -fx-font-weight: bold"
+            AnchorPane.rightAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="0"
+            alignment="CENTER_RIGHT"
+            text="0"
+            fx:id="calcView"/>
+        </AnchorPane>
+
+        <!-- BOX WITH WEIRD STORY BUTTONS -->
+        <HBox style="-fx-padding: 1 0 0 0 ;" VBox.vgrow="SOMETIMES" fx:id="memoryBox" maxHeight="70" spacing="4">
+          <MemoryButton onMouseClicked="#calcActivity" type="MEMORY_CLEAR" fx:id="memoryClear" text="MC" HBox.hgrow="ALWAYS" mnemonicParsing="false" minWidth="50" maxWidth="78" minHeight="29" prefWidth="Infinity" prefHeight="Infinity" disable="true"/>
+          <MemoryButton onMouseClicked="#calcActivity" type="MEMORY_RECALL" fx:id="memoryRecall" text="MR" HBox.hgrow="ALWAYS" mnemonicParsing="false" minWidth="50" maxWidth="78" minHeight="29" prefWidth="Infinity" prefHeight="Infinity" disable="true"/>
+          <MemoryButton onMouseClicked="#calcActivity" type="MEMORY_ADDITION" fx:id="memoryAddition" text="M+" HBox.hgrow="ALWAYS" mnemonicParsing="false" minWidth="50" maxWidth="78" minHeight="29" prefWidth="Infinity" prefHeight="Infinity"/>
+          <MemoryButton onMouseClicked="#calcActivity" type="MEMORY_SUBTRACTION" fx:id="memorySubtraction" text="M-" HBox.hgrow="ALWAYS" mnemonicParsing="false" minWidth="50" maxWidth="78" minHeight="29" prefWidth="Infinity" prefHeight="Infinity"/>
+          <MemoryButton onMouseClicked="#calcActivity" type="MEMORY_STORE" fx:id="memoryStore" text="MS" HBox.hgrow="ALWAYS" mnemonicParsing="false" minWidth="50" maxWidth="78" minHeight="29" prefWidth="Infinity" prefHeight="Infinity"/>
+          <MemoryButton onMouseClicked="#calcActivity" type="MEMORY_SHOW" fx:id="memoryShow" HBox.hgrow="ALWAYS" mnemonicParsing="false" minWidth="50" maxWidth="78" minHeight="29" prefWidth="Infinity" prefHeight="Infinity" disable="true">
+            <graphic>
+              <HBox alignment="CENTER">
+                <VBox alignment="CENTER_RIGHT">
+                  <Pane>
+                    <Label layoutY="1" text="M"/>
+                    <Label layoutY="-2" layoutX="11" text="▾"/>
+                  </Pane>
+                </VBox>
+              </HBox>
+            </graphic>
+          </MemoryButton>
+        </HBox>
+
+        <GridPane fx:id="numPad" style="-fx-padding: 2 4 4 4;" hgap="2" vgap="2">
+
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="76.0" maxWidth="396.0" prefWidth="Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="76.0" maxWidth="396.0" prefWidth="Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="76.0" maxWidth="396.0" prefWidth="Infinity"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="76.0" maxWidth="396.0" prefWidth="Infinity"/>
+          </columnConstraints>
+
+          <rowConstraints>
+            <RowConstraints minHeight="48.0" maxHeight="112" vgrow="SOMETIMES" prefHeight="Infinity"/>
+            <RowConstraints minHeight="48.0" maxHeight="112" vgrow="SOMETIMES" prefHeight="Infinity"/>
+            <RowConstraints minHeight="48.0" maxHeight="112" vgrow="SOMETIMES" prefHeight="Infinity"/>
+            <RowConstraints minHeight="48.0" maxHeight="112" vgrow="SOMETIMES" prefHeight="Infinity"/>
+            <RowConstraints minHeight="48.0" maxHeight="112" vgrow="SOMETIMES" prefHeight="Infinity"/>
+            <RowConstraints minHeight="48.0" maxHeight="112" vgrow="SOMETIMES" prefHeight="Infinity"/>
+          </rowConstraints>
+
+          <OtherButton type="PERCENT" onMouseClicked="#calcActivity" styleClass="gray-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="&#xE94C;"/>
+          <OtherButton errorAllowed="true" type="CLEAR_ENTRY" onMouseClicked="#calcActivity" styleClass="gray-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="CE" GridPane.columnIndex="1"/>
+          <OtherButton errorAllowed="true" type="CLEAR_ALL" onMouseClicked="#calcActivity" styleClass="gray-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="C" GridPane.columnIndex="2"/>
+          <OtherButton errorAllowed="true" type="CLEAR_LAST" onMouseClicked="#calcActivity" text="&#xE750;" styleClass="gray-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="3"/>
+
+          <FunctionButton function="ONE_DIVIDED_BY_X" onMouseClicked="#calcActivity" styleClass="gray-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="⅟&#x1D465;" GridPane.rowIndex="1"/>
+          <FunctionButton function="EXPONENT_TWO" onMouseClicked="#calcActivity" text="&#x1D465;²" styleClass="gray-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+          <FunctionButton function="SQUARE_ROOT_OF_TWO"
+            onMouseClicked="#calcActivity" styleClass="gray-button"
+            mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity"
+            GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <graphic>
+              <HBox alignment="CENTER">
+                <VBox alignment="CENTER">
+                  <StackPane>
+                    <Pane fx:id="smallSqrt">
+                      <Pane layoutX="1" layoutY="8">
+                        <Label style="-fx-font-size: 15" text="²"/>
+                      </Pane>
+                      <Pane layoutX="2" layoutY="9">
+                        <Label style="-fx-font-size: 14;" text="&#x221A;"/> <!-- root -->
+                      </Pane>
+                      <Pane layoutX="9" layoutY="8">
+                        <Label style="-fx-font-size: 15;" text="&#x1D465;"/> <!-- x -->
+                      </Pane>
+                      <Pane layoutX="13" layoutY="8" style="-fx-font-family: 'Arial Unicode MS'">
+                        <Label style="-fx-font-size: 19" text="&#x0305;"/> <!-- top -->
+                      </Pane>
+                    </Pane>
+
+                    <Pane fx:id="largeSqrt" visible="false">
+                      <Pane>
+                        <Label style="-fx-font-size: 23" layoutX="-7" layoutY="4" text="²"/>
+                      </Pane>
+                      <Pane layoutX="-5" layoutY="7">
+                        <Label style="-fx-font-size: 18;" text="&#x221A;"/>
+                      </Pane>
+                      <Pane layoutX="4" layoutY="3">
+                        <Label style="-fx-font-size: 22;" text="&#x1D465;"/>
+                      </Pane>
+                      <Pane style="-fx-font-family: 'Arial Unicode MS'" layoutX="9" layoutY="6">
+                        <Label style="-fx-font-size: 18" text="&#x0305;"/>
+                      </Pane>
+                    </Pane>
+                  </StackPane>
+                </VBox>
+              </HBox>
+            </graphic>
+          </FunctionButton>
+          <OperatorButton operator="DIVISION" onMouseClicked="#calcActivity" text="&#xE94A;" styleClass="gray-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="7" GridPane.rowIndex="2"/>
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+          <OperatorButton operator="MULTIPLICATION" onMouseClicked="#calcActivity" styleClass="gray-button" mnemonicParsing="false" text="&#xE947;" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="4" GridPane.rowIndex="3"/>
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="5" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="6" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+          <OperatorButton operator="SUBTRACTION" onMouseClicked="#calcActivity" styleClass="gray-button" text="&#xE949;" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="1" GridPane.rowIndex="4"/>
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="3" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+          <OperatorButton operator="ADDITION" onMouseClicked="#calcActivity" styleClass="gray-button" mnemonicParsing="false" text="&#xE948;" prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+
+          <OtherButton type="NEGATE" onMouseClicked="#calcActivity" text="⁺∕₋" styleClass="white-button" style="-fx-font-family: Arial" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="5"/>
+          <NumberButton onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+          <OtherButton type="SEPARATOR" onMouseClicked="#calcActivity" styleClass="white-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="," GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+          <OtherButton errorAllowed="true" type="RESULT_" onMouseClicked="#calcActivity" styleClass="result-button" mnemonicParsing="false" prefHeight="Infinity" prefWidth="Infinity" text="&#xE94e;" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+
+        </GridPane>
+      </VBox>
+      <!-- right story pane -->
+      <Pane maxWidth="0" fx:id="rightStoryPane" prefWidth="0.0"/>
+    </HBox>
+
+
+    <!-- LEFT MENU -->
+    <AnchorPane fx:id="leftMenu"
+      AnchorPane.leftAnchor="0"
+      AnchorPane.rightAnchor="0"
+      AnchorPane.topAnchor="32"
+      AnchorPane.bottomAnchor="0"
+      style="-fx-background-color: rgba(230,230,230, 0)"
+      onMousePressed="#switchLeftMenu" prefWidth="300" visible="false">
+
+      <AnchorPane
+        AnchorPane.leftAnchor="0"
+        prefWidth="255"
+        AnchorPane.topAnchor="0"
+        AnchorPane.bottomAnchor="0"
+        style="-fx-background-color: rgb(230,230,230)"
+      >
+        <Button
+          AnchorPane.topAnchor="0"
+          AnchorPane.leftAnchor="0"
+          onMouseClicked="#switchLeftMenu" mnemonicParsing="false" style="-fx-font-size: 16;" prefHeight="40.0" prefWidth="40.0" text="&#xE700;"/>
+
+        <ScrollPane AnchorPane.topAnchor="40" AnchorPane.bottomAnchor="70" AnchorPane.leftAnchor="0" style="-fx-background-color: rgb(230,230,230);" hbarPolicy="NEVER" prefWidth="255">
+
+          <VBox style="-fx-background-color: rgb(230,230,230)">
+
+            <Label styleClass="left-menu-text">Calculator</Label>
+
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/Standard.targetsize-16_contrast-white.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Standard"/>
+                </HBox>
+              </graphic>
+            </Button>
+
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/Scientific.targetsize-16_contrast-white.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Scientific"/>
+                </HBox>
+              </graphic>
+            </Button>
+
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/Programmer.targetsize-16_contrast-white.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Programmer"/>
+                </HBox>
+              </graphic>
+            </Button>
+
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/Date.targetsize-16_contrast-white.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Date Calculation"/>
+                </HBox>
+              </graphic>
+            </Button>
+
+            <Label styleClass="left-menu-text">Converter</Label>
+
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xeb0d;"/>
+                  </VBox>
+                  <Label text="Currency"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/sugar_cube_32.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Volume"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/length_32.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Length"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button layoutY="360.0" prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/weight_32.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Weight and Mass"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xe7a3;"/>
+                  </VBox>
+                  <Label text="Temperature"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xecad;"/>
+                  </VBox>
+                  <Label text="Energy"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xe809;"/>
+                  </VBox>
+                  <Label text="Area"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xeada;"/>
+                  </VBox>
+                  <Label text="Speed"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button layoutY="560.0" prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xe121;"/>
+                  </VBox>
+                  <Label text="Time"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xe945;"/>
+                  </VBox>
+                  <Label text="Power"/>
+                </HBox>
+              </graphic>
+            </Button>
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/photo_2020-11-19_19-03-58.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Data"/>
+                </HBox>
+              </graphic>
+            </Button>
+
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                    <Label style="-fx-font-family: 'Calculator MDL2 Assets'" text="&#xec4a;"/>
+                  </VBox>
+                  <Label text="Time"/>
+                </HBox>
+              </graphic>
+            </Button>
+
+            <Button prefWidth="300" styleClass="left-menu-button" prefHeight="40">
+              <graphic>
+                <HBox alignment="CENTER_LEFT">
+                  <VBox alignment="CENTER" style="-fx-padding: 0 10 0 0">
+                    <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                      <Image url="@/image/photo_2020-11-19_19-06-07.png"/>
+                    </ImageView>
+                  </VBox>
+                  <Label text="Angle"/>
+                </HBox>
+              </graphic>
+            </Button>
+
+          </VBox>
+        </ScrollPane>
+
+        <Button style="-fx-font-size: 15" styleClass="left_menu_button" prefHeight="40" AnchorPane.bottomAnchor="8" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+          <graphic>
+            <HBox alignment="CENTER_LEFT">
+              <VBox alignment="CENTER" style="-fx-padding: 0 10 0 2">
+                <Label style="-fx-font-family: 'Calculator MDL2 Assets';" text="&#xE946;"/>
+              </VBox>
+              <Label text="About"/>
+            </HBox>
+          </graphic>
+        </Button>
+      </AnchorPane>
+
+    </AnchorPane>
+
+    <!--     Bottom Pane-->
+    <Pane AnchorPane.rightAnchor="0"
+      AnchorPane.leftAnchor="0"
+      AnchorPane.topAnchor="32"
+      AnchorPane.bottomAnchor="0"
+      visible="false"
+      fx:id="paneForBottomStoryPane"
+      onMouseClicked="#closeBottomStoryPane">
+
+      <AnchorPane fx:id="bottomStoryPane" style="-fx-background-color: rgb(242,242,242)">
+        <Label AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" style="-fx-font-family: 'Segoe UI Semilight'; -fx-font-size: 14" text="There's no history yet"/>
+      </AnchorPane>
+    </Pane>
+  </AnchorPane>
+
+</AnchorPane>

@@ -1,0 +1,12 @@
+
+V	java:S106"9Replace this use of System.out or System.err by a logger.(ÒÎû¬8ßó¤•í.
+m
+java:S3776x"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(áîò¸úÿÿÿÿ
+[	java:S106"9Replace this use of System.out or System.err by a logger.(‘­˜Úşÿÿÿÿ8´ó›“í.
+U	java:S106~"9Replace this use of System.out or System.err by a logger.(û¤õµ8´Âï´í.
+œ
+java:S1186u"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(®‡ü ùÿÿÿÿ
+V	java:S106€"9Replace this use of System.out or System.err by a logger.(ÌÎíí8´ó›“í.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ùàÔËıÿÿÿÿ8´Âï´í.
+8
+java:S1118u"Hide this public constructor.(®‡ü ùÿÿÿÿ
